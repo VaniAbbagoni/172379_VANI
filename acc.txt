@@ -1,0 +1,6 @@
+ac.setDiscount(200);
+		cam.setId(2);
+		cam.setCustomer(); 
+		cam.setBalance(1000);
+		cam.deposit(1020);
+		

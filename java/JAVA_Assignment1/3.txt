@@ -1,0 +1,184 @@
+package com.customer;
+
+public class Customer 
+{
+	public String name; 
+	public String memberType;
+	public boolean member = false;
+	
+	public Customer(String name) 
+	{
+		this.name = name;
+	}
+
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getMemberType() {
+		return this.memberType;
+	}
+	public void setMemberType(String memberType) {
+		this.memberType = memberType;
+	}
+	
+	public boolean isMember() {
+		return member;
+	}
+	public void setMember(boolean member) {
+		this.member = member;
+	}
+	
+	
+	@Override
+	public String toString() 
+	{
+		return "Customer [name=" + name + ", memberType=" + memberType + ", member=" + member + "]";
+	}
+	
+}
+************************************************Visit**********************************************************************
+package com.customer;
+import java.util.Date;
+
+public class Visit extends Customer
+{
+	
+	public Visit(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+
+	Customer Customer;
+	public static double serviceExpense; 
+	public static double productExpense; 
+	public void setServiceExpense(double serviceExpense) {
+		this.serviceExpense = serviceExpense;
+	}
+	public double getProductExpense() {
+		return productExpense;
+	}
+	public void setProductExpense(double productExpense) {
+		this.productExpense = productExpense;
+	}
+
+	Date date;
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+
+	
+
+	public double getTotalExpense() {
+		double totalExpense = serviceExpense + productExpense;
+	
+		return totalExpense;
+	}
+	
+	
+	
+}
+
+******************************************DiscountRate*********************************************************************
+
+package com.customer;
+
+public class DiscountRate extends Visit
+{
+	 public DiscountRate(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+	static double  serviceDiscountPremium=0.2;
+	static double serviceDiscountGold=0.15;
+	static double serviceDiscountSilver=0.1;
+	static double productDiscountPremium=0.1;
+	static double productDiscountGold=0.1;
+	static double productDiscountSilver=0.1;
+	double discount;
+
+	
+	public double serviceDiscountRate(String membertype)
+	{
+		if (membertype.equals("Premium") )
+		{
+			return ( serviceExpense - (serviceExpense*serviceDiscountPremium));
+			
+		}
+		
+		else if (membertype.equals("Gold"))
+		{
+			return ( serviceExpense - (serviceExpense*serviceDiscountGold));
+			
+		}
+		
+		else if (membertype.equals("Silver"))
+		{
+			return ( serviceExpense - (serviceExpense*serviceDiscountSilver));
+			
+		}
+		else 
+		{
+			return serviceExpense;
+		}
+	}
+	public double productDiscountRate(String membertype)
+	{
+		if (membertype.equals("Premium") )
+		{
+			return  productExpense - (productExpense*productDiscountPremium);
+			
+		}
+		
+		else if (membertype.equals("Gold"))
+		{
+			return  productExpense - (productExpense*productDiscountGold);
+			
+		}
+		
+		else if (membertype.equals("Silver"))
+		{
+			return  productExpense - (productExpense*productDiscountSilver);
+			
+		}
+		else {
+			return productExpense;
+		}
+		
+	}
+	
+}
+
+*************************************************Main**********************************************************************
+package com.customer;
+
+public class Customer1 {
+	public static void main(String args[]) {
+		Customer c= new Customer("name");
+		c.setMemberType("Gold");
+		c.setMember(true);
+		Visit v = new Visit(c.getName());
+		v.setProductExpense(200);
+		v.setServiceExpense(4000);
+		System.out.println("Given serviceDiscountRate and productDiscountRate");
+		DiscountRate d = new DiscountRate(c.getName());
+		
+		System.out.println(d.serviceDiscountRate(c.getMemberType()));
+		System.out.println(d.productDiscountRate(c.getMemberType()));
+		System.out.println();
+
+		
+		
+	}
+
+}
